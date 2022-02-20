@@ -10,4 +10,4 @@ To build the project, open `piano.ino` and add LCD I2C library.
 [Link to LCD I2C library](https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library)
 
 ### Project picture
-![piano](piano.jpg)
+![piano](/piano.jpg)
