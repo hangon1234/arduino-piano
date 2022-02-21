@@ -136,29 +136,29 @@ void piano(){
   lcd.setCursor(0, 1);
   lcd.print("Left: Tone down ");
 
-  // Tone index
-  int toneIndex = 1;
+  // Octave
+  int octave = 1;
 
   while(true){
     // Shows piano instruction
     if((millis() - lastDisplayTime) > 3000){
       lcd.setCursor(0, 1);
       if(message == 0){
-        lcd.print("Left: Tone down ");
+        lcd.print("Left:Octave down");
         message = 1;
       }
       else if(message == 1){
-        lcd.print("Right: Tone up  ");
+        lcd.print("Right:Octave up ");
         message = 2;
       }
       else if(message == 2){
-        lcd.print("Exit: Press both");
+        lcd.print("Exit:Press both ");
         message = 0;
       }
       lastDisplayTime = millis();
     }
 
-    // Get input for tone up and down
+    // Get input for octave up and down
     if(digitalRead(leftButtonPin) == LOW){
       // if both button pressed,
       // finish loop and go back to main function
@@ -175,22 +175,22 @@ void piano(){
       // otherwise, update tone index
       if((millis() - lastPressTime) > 1000){
         lastPressTime = millis();
-        if(toneIndex != 0)
-          toneIndex--;
+        if(octave != 0)
+          octave--;
       }
     }
       
     if(digitalRead(rightButtonPin) == LOW)
       if((millis() - lastPressTime) > 1000){
         lastPressTime = millis();
-        if(toneIndex != 3)
-          toneIndex++;  
+        if(octave != 3)
+          octave++;  
       }
 
     // Play tone
     int input = getInput();
     if(input != -1)
-      tone(speakerPin, tones[toneIndex][input], 50);
+      tone(speakerPin, tones[octave][input], 50);
     }
 } 
 
