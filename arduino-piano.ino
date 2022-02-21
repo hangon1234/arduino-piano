@@ -133,8 +133,6 @@ void piano(){
   unsigned long lastPressTime = millis();
   
   int message = 0;
-  lcd.setCursor(0, 1);
-  lcd.print("Left: Tone down ");
 
   // Octave
   int octave = 1;
