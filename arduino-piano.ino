@@ -131,7 +131,12 @@ void piano(){
   unsigned long lastDisplayTime = millis();
   // For debouncing
   unsigned long lastPressTime = millis();
+
+  // Print instruction
+  lcd.setCursor(0, 1);
+  lcd.print("Exit:Press both ");
   
+  // To print instruction message
   int message = 0;
 
   // Octave
