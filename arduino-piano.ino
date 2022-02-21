@@ -189,7 +189,7 @@ void piano(){
     int input = getInput();
     if(input != -1)
       tone(speakerPin, tones[octave][input], 50);
-    }
+  }
 } 
 
 int getInput(){
