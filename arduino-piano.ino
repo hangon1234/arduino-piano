@@ -7,8 +7,8 @@ int clockPin = 12;
 int inputPin = 11;
 int redPin = 10;
 int greenPin = 9;
-int bluePin = 8;
-int speakerPin = 3;
+int bluePin = 3;
+int speakerPin = 2;
 int leftButtonPin = 6;
 int rightButtonPin = 5;
 
