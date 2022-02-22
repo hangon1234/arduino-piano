@@ -7,9 +7,9 @@ int clockPin = 12;
 int inputPin = 11;
 int redPin = 10;
 int greenPin = 9;
-int bluePin = 3;
+int bluePin = 6;
 int speakerPin = 2;
-int leftButtonPin = 6;
+int leftButtonPin = 7;
 int rightButtonPin = 5;
 
 // Tones in array
@@ -49,7 +49,7 @@ bool pwmIncrease = true;
 unsigned long fadeLedDelay = millis();
 
 void fadeLed(){
-  if((millis() - fadeLedDelay) > 30){
+  if((millis() - fadeLedDelay) > 20){
     if(pwmIncrease){
       if(pwmValue < 255){
         analogWrite(redPin, (pwmValue + 5));
