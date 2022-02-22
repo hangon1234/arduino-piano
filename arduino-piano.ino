@@ -42,13 +42,39 @@ String tone_order[] = {"C ", "C#", "D ", "D#", "E ", "F", "F#",
                       "G ", "G#", "A", "A#", "B", "C ", "C#",
                       "D", "D#", "E ", "F ", "F#", "G ", "G#",
                       "A ", "A#", "B ", "C "};
-                  
+
+// For LED Fade
+int pwmValue = 0;
+bool pwmIncrease = true;
+unsigned long fadeLedDelay = millis();
+
+void fadeLed(){
+  if((millis() - fadeLedDelay) > 30){
+    if(pwmIncrease){
+      if(pwmValue < 255){
+        analogWrite(redPin, (pwmValue + 5));
+        analogWrite(greenPin, (pwmValue + 5));
+        analogWrite(bluePin, (pwmValue + 5));
+        pwmValue = pwmValue + 5;
+      }else
+        pwmIncrease = false;
+    }else{
+      analogWrite(redPin, (pwmValue - 5));
+      analogWrite(greenPin, (pwmValue - 5));
+      analogWrite(bluePin, (pwmValue - 5));
+      pwmValue = pwmValue - 5;
+      if(pwmValue <= 0)
+        pwmIncrease = true;
+    }
+    fadeLedDelay = millis();
+  }
+}
 
 //0x27 = lcd address
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // Let user to know if hardware is working correctly or not
-void setup() {
+void setup() {  
   // Setup LCD
   lcd.begin();
   lcd.backlight();
@@ -120,6 +146,7 @@ void setup() {
 
   // Clear LCD
   lcd.clear();
+
 }
 
 void piano(){
@@ -143,6 +170,9 @@ void piano(){
   int octave = 1;
 
   while(true){
+    // LED dimming effect
+    fadeLed();
+    
     // Shows piano instruction
     if((millis() - lastDisplayTime) > 3000){
       lcd.setCursor(0, 1);
@@ -216,13 +246,19 @@ int getInput(){
 }
 
 void pitchTest(){
+  // Stop dimming LED
+  digitalWrite(redPin, LOW);
+  digitalWrite(greenPin, LOW);
+  digitalWrite(bluePin, LOW);
+
+  // Show instruction
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Perfect pitch   ");
   lcd.setCursor(0, 1);
   lcd.print("tester");
   delay(2000);
-
+  
   // To generate better random value
   randomSeed(analogRead(0));
   
@@ -393,4 +429,7 @@ void loop() {
     delay(2000);
     pitchTest();  
   }
+
+  // LED dimming effect
+  fadeLed();
 }
