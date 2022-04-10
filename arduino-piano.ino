@@ -1,16 +1,18 @@
+// Five-octave piano
+
 #include <LiquidCrystal_I2C.h>
 #include "pitches.h"
 
 // Define pins
-int shLdPin = 13;
-int clockPin = 12;
-int inputPin = 11;
-int redPin = 10;
-int greenPin = 9;
-int bluePin = 6;
-int speakerPin = 2;
-int leftButtonPin = 7;
-int rightButtonPin = 5;
+int shLdPin = 2;
+int clockPin = 3;
+int inputPin = 4;
+int redPin = 9;
+int greenPin = 10;
+int bluePin = 11;
+int speakerPin = 13;
+int leftButtonPin = 6;
+int rightButtonPin = 7;
 
 // Tones in array
 // Since we have 25 push button for keyboard,
@@ -135,7 +137,7 @@ void setup() {
     
     digitalWrite(clockPin, LOW);
     digitalWrite(clockPin, HIGH);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-  }
+  } 
   
   // Check two button
   lcd.setCursor(14, 1);
@@ -223,7 +225,7 @@ void piano(){
     // Play tone
     int input = getInput();
     if(input != -1)
-      tone(speakerPin, tones[octave][input], 50);
+      tone(speakerPin, tones[octave][input], 100);
   }
 } 
 
