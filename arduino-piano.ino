@@ -172,9 +172,6 @@ void piano(){
   int octave = 1;
 
   while(true){
-    // LED dimming effect
-    fadeLed();
-    
     // Shows piano instruction
     if((millis() - lastDisplayTime) > 3000){
       lcd.setCursor(0, 1);
@@ -225,7 +222,7 @@ void piano(){
     // Play tone
     int input = getInput();
     if(input != -1)
-      tone(speakerPin, tones[octave][input], 100);
+      tone(speakerPin, tones[octave][input], 50);
   }
 } 
 
